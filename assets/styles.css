@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600&display=swap');
+
+:root {
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    margin: 0;
+    color: #eee;
+}
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    background: #101010;
+}
+
+
+menu {
+    background: #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10%;
+    margin: 0;
+}
+
+menu h3 {
+    color: black;
+    margin: 0;
+}
+
+.logo-box img {
+    height: 30px;
+}
+
+.logo-box h3 {
+    display: inline;
+    margin-left: -10px;
+}
+
+.name-box h3 {
+    font-size: 2em;
+}
+
+#eyes {
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 5vw;
+    text-align: center;
+    margin: 0;
+    line-height: 1;
+}
+
+
+/*chart*/
+
+.kpi-box {
+    position: relative;
+    width: 200px;
+    display: inline-block;
+    text-align: center;
+}
+
+.kpi-box h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+ellipse[stroke-width="6.5"] {
+    stroke: transparent;
+  }
