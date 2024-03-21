@@ -23,20 +23,37 @@ html, body {
 
 menu {
     background: #eee;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 10%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 60px;
     margin: 0;
+    padding: 10px 15px;
+    z-index: 2;
+}
+
+.logo {
+    color: black;
+    font-weight: 200;
+    font-style: italic;
+    margin-bottom: 125px;
 }
 
 menu h3 {
-    color: black;
+    color: #333;
+    text-transform: uppercase;
+    line-height: 2;
     margin: 0;
+    writing-mode: vertical-rl;
+}
+
+.logo-box {
+    text-align: center;
 }
 
 .logo-box img {
-    height: 30px;
+    height: 40px;
 }
 
 .logo-box h3 {
@@ -60,7 +77,7 @@ menu h3 {
 .row {
     display: flex;
     justify-content: space-around;
-    margin: 5% 0;
+    margin: 1% 0;
 }
 
 
@@ -80,6 +97,7 @@ menu h3 {
     transform: translateX(-50%);
 }
 
-ellipse[stroke-width="6.5"] {
-    stroke: transparent;
-  }
+video {
+    max-width: 40%;
+    margin: auto;
+}

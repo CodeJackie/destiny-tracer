@@ -9,35 +9,43 @@
         <link rel="stylesheet" href="assets/styles.css">
     </head>
     <body>
-        <header>
-            <menu>
-                <div class="logo-box">
-                    <img src="assets/logo.svg"> 
-                    <h3>Guardian Tracker</h3>
+        <main>
+            <header>
+                <menu>
+                    <div class="logo-box">
+                        <img src="assets/logo.svg"> 
+                        <h2 class="logo">gLog</h2>
+                    </div>
+                    <div class="name-box">
+                        <h3>CodeJackie</h3>
+                    </div>
+                </menu>
+            </header>
+            <h1 id="eyes">Eyes Up Guardian</h1>
+            <div class="row">
+                <div class="kpi-box">
+                    <h1>KDA</h1>
+                    <div id="pacman" style="width: 200px; height: 200px;"></div>
+                    <h2 id="kdaStat"></h2>
                 </div>
-                <div class="name-box">
-                    <h3>CodeJackie</h3>
+                <div class="kpi-box">
+                    <h1>Opponents</h1>
+                    <div id="opps" style="width: 200px; height: 200px;"></div>
+                    <h2 id="oppStat"></h2>
                 </div>
-            </menu>
-        </header>
-        <h1 id="eyes">Eyes Up Guardian</h1>
-        <div class="row">
-            <div class="kpi-box">
-                <h1>KDA</h1>
-                <div id="pacman" style="width: 200px; height: 200px;"></div>
-                <h2 id="kdaStat"></h2>
+                <div class="kpi-box">
+                    <h1>Efficiency</h1>
+                    <div id="effGraph" style="width: 200px; height: 200px;"></div>
+                    <h2 id="effStat"></h2>
+                </div>
+            </div>   
+            <div class="row">
+                <video autoplay muted loop controls>
+                    <source src="assets/Destiny 2-2024_01_20-23-03-18.mp4" type="video/mp4">
+                </video>
+                <div class="column"></div>
             </div>
-            <div class="kpi-box">
-                <h1>Opponents</h1>
-                <div id="opponents" style="width: 200px; height: 200px;"></div>
-                <h2 id="oppStat"></h2>
-            </div>
-            <div class="kpi-box">
-                <h1>Efficiency</h1>
-                <div id="efficiency" style="width: 200px; height: 200px;"></div>
-                <h2 id="effStat"></h2>
-            </div>
-        </div>        
+        </main>     
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript" src="js/app.js" async defer></script>
     </body>

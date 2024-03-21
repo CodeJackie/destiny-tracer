@@ -6,6 +6,7 @@ const characterId = '2305843009269811326'
 async function fetchData(url, headers) {
   const response = await fetch(url, { headers });
   const data = await response.json();
+  console.log(data)
   return data;
 }
 
@@ -46,6 +47,31 @@ async function processStat(apiUrl, apiKey, statKey, condition) {
   return calculateAverage(stats);
 }
 
+async function fetchGameData() {
+  const response = await fetch(apiUrl, {
+    headers: { 'X-API-Key': apiKey }
+  });
+  const data = await response.json();
+  
+  if (data.Response && Array.isArray(data.Response.activities)) {
+    // Assuming 'mode' is the property you're interested in, and 'targetMode' is the mode you want to filter by
+    const targetMode = 73; // Example mode value; adjust as necessary
+
+    const filteredAndMappedData = data.Response.activities
+      .filter(activity => activity.activityDetails && activity.activityDetails.mode === targetMode) // Filter by mode
+      .map((game, index) => ({
+        gameInstance: `Game ${index + 1}`, // Use any other identifier as needed
+        opponentsDefeated: game.values.opponentsDefeated.basic.value // Adjust according to actual structure
+      }));
+
+    return filteredAndMappedData;
+  } else {
+    console.error("Unexpected data structure:", data);
+    return []; // Return an empty array to handle gracefully
+  }
+}
+
+
 
 
 const apiUrl = `https://stats.bungie.net/Platform/Destiny2/1/Account/${membershipId}/Character/${characterId}/Stats/Activities/`;
@@ -56,6 +82,10 @@ const efficiencyStatKey = 'efficiency'; // Ensure this key matches the API's exa
 let kdaData = {
   kdaStat: 'null',
   kdaDif: 'null'
+}
+let effData = {
+  effStat: 'null',
+  effDif: 'null'
 }
 
 const mode = activity => activity.activityDetails.mode === 73;
@@ -76,40 +106,78 @@ const mode = activity => activity.activityDetails.mode === 73;
     .then(averageOpponents => {
       displayStatToDOM('oppStat', `${averageOpponents.toFixed(2)}`)
     })
+    fetchGameData().then(gameData => {
+      drawOpponentsDefeatedChart(gameData);
+  });
     
 
     const efficiencyAverage = await processStat(apiUrl, apiKey, efficiencyStatKey, mode)
     .then(averageEff => {
       displayStatToDOM('effStat', `${averageEff.toFixed(2)}`)
+      effData.effStat = averageEff / 0.04
+      effData.effDif = 50 - effData.effStat
+
+      drawHalfpipe (effData.effStat, effData.effDif, 'purple', 'effGraph')
     })
 })();
 
 
-
-      function drawHalfpipe (stat, difference, color, element) {
-            let data = google.visualization.arrayToDataTable([
-              ['Stat Name', 'Percentage'],
-              ['', stat],
-              ['', difference],
-              ['', 50]
-            ])
-            let options = {
-              backgroundColor: '#101010',
-              legend: 'none',
-              pieHole: '.7',
-              pieSliceBorderColor: 'transparent',
-              pieSliceText: 'none',
-              pieStartAngle: 270,
-              tooltip: { trigger: 'none' },
-              slices: {
-                0: { color: color },
-                1: { color: '#ddd' },
-                2: { color: 'transparent'}
-            }
-            
-          }
-            const chart = new google.visualization.PieChart(document.getElementById(element))
-            chart.draw(data, options);
+function drawHalfpipe (stat, difference, color, element) {
+      let data = google.visualization.arrayToDataTable([
+        ['Stat Name', 'Percentage'],
+        ['', stat],
+        ['', difference],
+        ['', 50]
+      ])
+      let options = {
+        backgroundColor: '#101010',
+        legend: 'none',
+        pieHole: '.7',
+        pieSliceBorderColor: 'transparent',
+        pieSliceText: 'none',
+        pieStartAngle: 270,
+        tooltip: { trigger: 'none' },
+        slices: {
+          0: { color: color },
+          1: { color: '#ddd' },
+          2: { color: 'transparent'}
       }
+      
+    }
+      const chart = new google.visualization.PieChart(document.getElementById(element))
+      chart.draw(data, options);
+}
+
+function drawOpponentsDefeatedChart(gameData) {
+  // Create the data table and add the header row
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Game Instance'); // X-axis: Game instance
+  data.addColumn('number', 'Opponents Defeated'); // Y-axis: Number of opponents defeated
+
+  // Dynamically add rows from gameData
+  gameData.forEach(game => {
+      data.addRow([game.gameInstance, game.opponentsDefeated]);
+  });
+
+  // Set chart options
+  var options = {
+      title: 'Opponents Defeated per Game',
+      curveType: 'function',
+      legend: 'none',
+      backgroundColor: '#101010',
+      labelColor: '#eee',
+      hAxis: {
+        textStyle: { color: '#fff' } 
+    }
+
+  };
+
+  // Draw the chart
+  var chart = new google.visualization.LineChart(document.getElementById('opps'));
+  chart.draw(data, options);
+}
+
 
 google.charts.load("current", {packages:["corechart"]});
+
+  
