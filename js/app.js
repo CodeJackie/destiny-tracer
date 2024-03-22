@@ -78,7 +78,8 @@ const apiUrl = `https://stats.bungie.net/Platform/Destiny2/1/Account/${membershi
 
 const kdaStatKey = 'killsDeathsAssists';
 const opponentsDefeatedStatKey = 'opponentsDefeated'; // Ensure this key matches the API's exact key
-const efficiencyStatKey = 'efficiency'; // Ensure this key matches the API's exact key
+const efficiencyStatKey = 'efficiency'; 
+const scoreStatKey = 'score'
 let kdaData = {
   kdaStat: 'null',
   kdaDif: 'null'
@@ -86,6 +87,10 @@ let kdaData = {
 let effData = {
   effStat: 'null',
   effDif: 'null'
+}
+let scoreData = {
+  scoreStat: 'null',
+  scoreDif: 'null'
 }
 
 const mode = activity => activity.activityDetails.mode === 73;
@@ -100,6 +105,17 @@ const mode = activity => activity.activityDetails.mode === 73;
       //Dividing averageKda by 2 gives us a percentage of the maximum KDA. Because only half of the pie chart is used, we divide that percentage in two, and then multiply by 100 to get the graphable percentage. A faster way to achieve this is to simply divide averageKda by 0.04.
       
       drawHalfpipe (kdaData.kdaStat, kdaData.kdaDif, 'greenyellow', 'pacman')
+    })
+    
+    const scoreAverage = await processStat(apiUrl, apiKey, scoreStatKey, mode)
+    .then(averageScore => {
+      displayStatToDOM('scoreStat', `${averageScore.toFixed(2)}`)
+      scoreData.scoreStat = ((averageScore / 50) / 2) * 100
+      scoreData.scoreDif = 50 - scoreData.scoreStat
+      console.log(averageScore)
+     
+      
+      drawHalfpipe (scoreData.scoreStat, scoreData.scoreDif, 'red', 'score')
     })
 
     const opponentsAverage = await processStat(apiUrl, apiKey, opponentsDefeatedStatKey, mode)

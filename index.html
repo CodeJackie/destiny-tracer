@@ -9,8 +9,7 @@
         <link rel="stylesheet" href="assets/styles.css">
     </head>
     <body>
-        <main>
-            <header>
+        <header>
                 <menu>
                     <div class="logo-box">
                         <img src="assets/logo.svg"> 
@@ -21,7 +20,7 @@
                     </div>
                 </menu>
             </header>
-            <h1 id="eyes">Eyes Up Guardian</h1>
+        <main>   
             <div class="row">
                 <div class="kpi-box">
                     <h1>KDA</h1>
@@ -29,9 +28,9 @@
                     <h2 id="kdaStat"></h2>
                 </div>
                 <div class="kpi-box">
-                    <h1>Opponents</h1>
-                    <div id="opps" style="width: 200px; height: 200px;"></div>
-                    <h2 id="oppStat"></h2>
+                    <h1>Score</h1>
+                    <div id="score" style="width: 200px; height: 200px;"></div>
+                    <h2 id="scoreStat"></h2>
                 </div>
                 <div class="kpi-box">
                     <h1>Efficiency</h1>
@@ -39,10 +38,14 @@
                     <h2 id="effStat"></h2>
                 </div>
             </div>   
-            <div class="row">
-                <video autoplay muted loop controls>
-                    <source src="assets/Destiny 2-2024_01_20-23-03-18.mp4" type="video/mp4">
-                </video>
+            <div class="row" id="row2">
+                <div class="chart-box">
+                    <div class="chart-inner">
+                        <h1>Opponents</h1>
+                        <div id="opps"></div>
+                    </div>
+                    <h2 id="oppStat"></h2>
+                </div>
                 <div class="column"></div>
             </div>
         </main>     

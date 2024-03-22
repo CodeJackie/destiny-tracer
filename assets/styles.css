@@ -20,7 +20,6 @@ html, body {
     background: #101010;
 }
 
-
 menu {
     background: #eee;
     position: fixed;
@@ -65,13 +64,9 @@ menu h3 {
     font-size: 2em;
 }
 
-#eyes {
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 5vw;
-    text-align: center;
-    margin: 0;
-    line-height: 1;
+main {
+    width: calc(100vw - 60px);
+    float: right;
 }
 
 .row {
@@ -85,7 +80,6 @@ menu h3 {
 
 .kpi-box {
     position: relative;
-    width: 200px;
     display: inline-block;
     text-align: center;
 }
@@ -95,6 +89,28 @@ menu h3 {
     top: 50%;
     left: 50%;
     transform: translateX(-50%);
+}
+
+#row2 {
+    justify-content: space-evenly;
+}
+
+.chart-box {
+    width: 50vw;
+    height: 250px;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#opps, .chart-inner {
+    width: 100%;
+    height: auto;
+}
+
+#oppStat {
+    font-size: 7vw;
 }
 
 video {
