@@ -1,4 +1,4 @@
-const apiKey = ''
+const apiKey = '48e12dac74404891b88d0f5ff7056a9c'
 const membershipId = '4611686018429542541'
 const characterId = '2305843009269811326'
 
@@ -110,7 +110,7 @@ const mode = activity => activity.activityDetails.mode === 73;
     const scoreAverage = await processStat(apiUrl, apiKey, scoreStatKey, mode)
     .then(averageScore => {
       displayStatToDOM('scoreStat', `${averageScore.toFixed(2)}`)
-      scoreData.scoreStat = ((averageScore / 50) / 2) * 100
+      scoreData.scoreStat = (averageScore / 75) * 50
       scoreData.scoreDif = 50 - scoreData.scoreStat
       console.log(averageScore)
      

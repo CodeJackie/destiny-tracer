@@ -64,9 +64,15 @@ menu h3 {
     font-size: 2em;
 }
 
-main {
-    width: calc(100vw - 60px);
+main, footer {
+    width: calc(100vw - 146px);
     float: right;
+}
+
+footer {
+    background: #999;
+    margin: 20px 0 0;
+    padding: 0 2%;
 }
 
 .row {
